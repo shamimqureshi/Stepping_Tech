@@ -1,6 +1,7 @@
-/* ================================================
-   8. SERVICES SECTION
-   ================================================ */
+/* ==========================================================================
+   Services Section Styles
+   ========================================================================== */
+
 .services-section {
   padding: 6rem 0;
 }
@@ -40,7 +41,7 @@
   max-width: 600px;
 }
 
-/* Main Layout */
+/* Main Layout (Desktop) */
 .s-layout {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -384,87 +385,164 @@
   font-size: 0.8rem;
   color: var(--text-muted);
 }
-
-/* ================================================
-   🔥 LAPTOP/DESKTOP VIEW (One Frame Lock)
-   ================================================ */
-@media (min-width: 651px) {
+/* ==========================================================================
+   DESKTOP OVERRIDES (Show slider, natural height, reduced top gap)
+   ========================================================================== */
+@media (min-width: 1025px) {
   .services-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 1.5rem 2rem;
+    min-height: 100vh !important;
+    height: auto !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* Aligns content to the top */
+    padding-top: 120px !important; /* 🔥 Smaller padding to close the gap */
+    padding-bottom: 4rem !important;
   }
-
-  .services-head,
-  .s-layout {
-    max-height: calc(100vh - 120px);
-  }
-
-  .s-cards {
-    overflow-y: auto;
-    max-height: calc(100vh - 180px);
-  }
-
-  .s-cards::-webkit-scrollbar {
-    width: 4px;
-  }
-  .s-cards::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 10px;
+  .s-slider {
+    display: block !important;
   }
 }
 
-/* ================================================
-   🔥 MOBILE VIEW (Only Slider, No Gap)
-   ================================================ */
+/* ==========================================================================
+   MOBILE VIEW (Real Cards + Slider + Connect Button)
+   ========================================================================== */
 @media (max-width: 650px) {
-  
   .services-section {
-    /* 🔥 Extra space hataya */
-    min-height: 100vh;
+    min-height: auto;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px 0 2rem 0;
+    padding: 80px 0 3rem 0;
     overflow: hidden;
   }
-
-  .services-head { 
+  .services-head {
     padding: 0 1.5rem;
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
   }
-  .services-head .sec-title { font-size: 1.8rem; }
-  .services-head .sec-sub { font-size: 0.85rem; }
+  .services-head .sec-title {
+    font-size: 1.8rem;
+  }
+  .services-head .sec-sub {
+    display: none;
+  }
+  .services-head .btn-pill {
+    display: none;
+  }
 
-  .s-layout { display: none !important; }
-  .s-points { display: none; }
+  .s-layout {
+    display: none !important;
+  }
+  .s-points {
+    display: none;
+  }
 
   .s-slider {
     display: block !important;
     margin-top: 0;
     width: 100%;
   }
-
-  .s-sh { 
+  .s-sh {
     padding: 0 1.5rem;
-    flex-direction: column; 
-    align-items: flex-start; 
-    gap: 0.5rem; 
-    margin-bottom: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .s-lbl {
+    font-size: 0.65rem;
+  }
+  .s-ticker-controls {
+    gap: 0.5rem;
+  }
+  .s-ticker-status {
+    display: none;
+  }
+  .s-pause {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.65rem;
   }
 
-  .s-slide { 
-    width: 80vw; 
-    padding: 1.5rem;
+  .s-slide {
+    width: 75vw;
+    padding: 1rem;
     border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  .s-slide b {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+  }
+  .s-slide span {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
   }
 
-  .s-mock { height: 100px; margin-bottom: 1rem; }
-  .s-slide b { font-size: 1.3rem; margin-bottom: 0.4rem; }
-  .s-slide span { font-size: 0.85rem; }
+  .s-slide::after {
+    content: "Explore service";
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-top: auto;
+  }
+  .mobile-s-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand);
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .mobile-s-num {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .mobile-connect-wrapper {
+    margin-top: 1.5rem;
+    padding: 0 1.5rem;
+    text-align: center;
+    width: 100%;
+  }
+  .mobile-connect-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--dark);
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+  }
+  .mobile-connect-btn:hover {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
 }
