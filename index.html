@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteppingTech | Full-Stack Studio</title>
+
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Main CSS Link -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#home" class="brand">
+            <div class="brand-logo">
+                <img src="imgage/logo.png" alt="SteppingTech Logo">
+            </div>
+            <span class="brand-text"><span class="text-brand">&lt;</span>SteppingTech<span class="text-brand">/&gt;</span></span>
+        </a>
+
+        <div class="desktop-menu">
+            <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+            <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
+            <a href="#skills" class="nav-link"><i class="fas fa-code"></i> Skills</a>
+            <a href="#projects" class="nav-link"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="#services" class="nav-link"><i class="fas fa-cogs"></i> Services</a>
+            <a href="#testimonials" class="nav-link"><i class="fas fa-star"></i> Reviews</a>
+            <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <!-- Naya Logout Button (Sirf login hone par dikhega) -->
+            <button id="adminLogoutBtn" onclick="logoutAdmin()" class="admin-btn hidden" style="background: transparent; border: 1px solid #ef4444; color: #ef4444;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+
+            <button id="mobileMenuBtn" class="mobile-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
+        <a href="#skills" class="nav-link"><i class="fas fa-code"></i> Skills</a>
+        <a href="#projects" class="nav-link"><i class="fas fa-project-diagram"></i> Projects</a>
+        <a href="#services" class="nav-link"><i class="fas fa-cogs"></i> Services</a>
+        <a href="#testimonials" class="nav-link"><i class="fas fa-star"></i> Reviews</a>
+        <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+        <!-- Mobile ke liye Logout -->
+        <button id="adminLogoutBtnMobile" onclick="logoutAdmin()" class="admin-btn hidden" style="background: transparent; border: 1px solid #ef4444; color: #ef4444; justify-content: center; margin-top: 0.5rem;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+</nav>
+
+<!-- ==================== HOME (HERO) SECTION ==================== -->
+<section id="home" class="hero">
+    <div class="hero-grid">
+        <div class="hero-content">
+            <span class="hero-kicker mono"><span class="live-dot"></span> STEPPINGTECH <span class="kicker-divider">/</span> FULL-STACK STUDIO</span>
+            <h1 class="hero-title">We build <em class="rotating-word" id="rotatingWord">full-stack</em><br>digital experiences<span class="title-period">.</span></h1>
+            <p class="hero-lead">From polished interfaces to powerful backend systems, SteppingTech turns ideas into fast, scalable, and memorable digital products.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="cta hero-cta"><span>Let's build together</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="#projects" class="btn-ghost hero-secondary">Explore projects <i class="fa-solid fa-arrow-down-right"></i></a>
+            </div>
+        </div>
+        <div class="hero-stage">
+            <div class="orbit orbit-one" aria-hidden="true"></div>
+            <div class="orbit orbit-two" aria-hidden="true"></div>
+            <span class="orbit-node node-one" aria-hidden="true"></span>
+            <span class="orbit-node node-two" aria-hidden="true"></span>
+            <span class="orbit-node node-three" aria-hidden="true"></span>
+
+            <div class="logo-card" id="logoCard">
+                <img alt="SteppingTech Circuit Tree Logo" src="imgage/logo.png">
+                <div class="shine"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== ABOUT SECTION ==================== -->
+<section id="about" class="sec about-section">
+    <div class="section-wrap">
+        
+        <!-- Heading -->
+        <header class="section-header reveal" style="margin-bottom: 2rem;">
+            <div class="eyebrow"><i data-lucide="user"></i> About Me</div>
+            <h2 class="sec-title" style="font-size: clamp(2rem, 4vw, 3rem);">My <span>Journey</span> &amp; Expertise</h2>
+            <p class="sec-sub">A quick look into who I am, what I do, and how I can help your business grow.</p>
+        </header>
+
+        <div class="about-container">
+            
+            <!-- Left Side: Animated Person (Lottie) -->
+            <div class="about-animation-wrapper reveal">
+                <lottie-player 
+                    src="https://assets5.lottiefiles.com/packages/lf20_kyu7xb1v.json" 
+                    background="transparent" 
+                    speed="1" 
+                    style="width: 100%; height: 100%;" 
+                    loop 
+                    autoplay>
+                </lottie-player>
+            </div>
+
+            <!-- Right Side: Text & Stats -->
+            <div class="about-content reveal">
+                <p class="about-lead">
+                    I'm a passionate <strong class="text-brand">Full-Stack Developer</strong> specializing in building clean, scalable, and high-performance web applications.
+                </p>
+                <p class="about-desc">
+                    From designing seamless user interfaces to architecting robust backend systems, I handle the entire lifecycle of a project. My focus is always on writing maintainable code and delivering exceptional user experiences.
+                </p>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>10+</h3>
+                        <span>Projects</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <span>Satisfaction</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>24/7</h3>
+                        <span>Support</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!-- Lottie Player Script (Add this in <head> or before closing </body>) -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<!-- ==================== SKILLS SECTION ==================== -->
+<section class="skills-section" id="skills">
+    <div class="floating-orb orb-one" aria-hidden="true"></div>
+    <div class="floating-orb orb-two" aria-hidden="true"></div>
+
+    <div class="section-shell">
+        <header class="section-header reveal">
+            <div class="eyebrow"><i data-lucide="sparkles"></i> What I work with</div>
+            <h2 class="sec-title">My <span>Skills</span> &amp; Toolkit</h2>
+            <p class="sec-sub">Technologies and tools I use to build responsive web experiences, develop backend services, work with databases, and ship projects from idea to deployment.</p>
+        </header>
+
+        <div class="skills-layout">
+            <!-- 3D Sphere -->
+            <div>
+                <div id="skills-sphere" class="sphere-wrap reveal" aria-label="Interactive rotating sphere of skills">
+                    <div class="sphere-label">
+                        <strong id="sphere-name">FULL-STACK</strong>
+                        <small id="sphere-hint">Drag or hover to explore</small>
+                    </div>
+                </div>
+                <p class="sphere-caption reveal">A living 3D map of my toolkit. Drag to rotate, or hover over a skill to explore.</p>
+            </div>
+
+            <!-- Desktop Grid (Mobile par hide hoga) -->
+            <div class="skill-slider-viewport desktop-only">
+                <div class="skill-groups">
+                    <article class="skill-group reveal">
+                        <h2 class="group-heading"><i data-lucide="code-2"></i> Languages &amp; Core</h2>
+                        <div class="skill-list">
+                            <span class="skill-chip"><i data-lucide="coffee"></i>Java</span>
+                            <span class="skill-chip"><i data-lucide="file-code-2"></i>JavaScript</span>
+                            <span class="skill-chip"><i data-lucide="code"></i>HTML5</span>
+                            <span class="skill-chip"><i data-lucide="palette"></i>CSS3</span>
+                            <span class="skill-chip"><i data-lucide="database"></i>SQL</span>
+                        </div>
+                    </article>
+
+                    <article class="skill-group reveal">
+                        <h2 class="group-heading"><i data-lucide="boxes"></i> Frameworks &amp; Databases</h2>
+                        <div class="skill-list">
+                            <span class="skill-chip"><i data-lucide="leaf"></i>Spring Boot</span>
+                            <span class="skill-chip"><i data-lucide="layout-template"></i>Bootstrap</span>
+                            <span class="skill-chip"><i data-lucide="wind"></i>Tailwind CSS</span>
+                            <span class="skill-chip"><i data-lucide="database"></i>PostgreSQL</span>
+                            <span class="skill-chip"><i data-lucide="network"></i>REST API</span>
+                        </div>
+                    </article>
+
+                    <article class="skill-group reveal">
+                        <h2 class="group-heading"><i data-lucide="wrench"></i> Tools &amp; Deployment</h2>
+                        <div class="skill-list">
+                            <span class="skill-chip"><i data-lucide="code-2"></i>VS Code</span>
+                            <span class="skill-chip"><i data-lucide="panels-top-left"></i>IntelliJ IDEA</span>
+                            <span class="skill-chip"><i data-lucide="git-branch"></i>Git</span>
+                            <span class="skill-chip"><i data-lucide="github"></i>GitHub</span>
+                            <span class="skill-chip"><i data-lucide="send"></i>Postman</span>
+                            <span class="skill-chip"><i data-lucide="radio-tower"></i>Apidog</span>
+                            <span class="skill-chip"><i data-lucide="cloud-upload"></i>Vercel</span>
+                            <span class="skill-chip"><i data-lucide="globe"></i>Netlify</span>
+                            <span class="skill-chip"><i data-lucide="smartphone"></i>Responsive Design</span>
+                        </div>
+                    </article>
+
+                    <article class="skill-group reveal">
+                        <h2 class="group-heading"><i data-lucide="layers-3"></i> Development Practices</h2>
+                        <div class="skill-list">
+                            <span class="skill-chip"><i data-lucide="monitor-smartphone"></i>Mobile-first UI</span>
+                            <span class="skill-chip"><i data-lucide="git-pull-request"></i>Version Control</span>
+                            <span class="skill-chip"><i data-lucide="plug"></i>API Integration</span>
+                            <span class="skill-chip"><i data-lucide="rocket"></i>Deployment</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔥 NAYA: Mobile Marquee Slider (Sirf Mobile Par Dikhega) -->
+        <div class="mobile-marquee-wrapper">
+            <div class="mobile-marquee-track" id="mobileMarquee">
+                <!-- JS yahan automatically chips daalega -->
+            </div>
+        </div>
+
+        <div class="bottom-row reveal">
+            <div class="availability"><span class="status-dot"></span><span>Always learning. Always building.</span></div>
+            <p class="bottom-note">Clean UI · Responsive layouts · Practical solutions</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects" class="sec">
+    <header class="section-header reveal">
+        <div class="eyebrow"><i data-lucide="folder-open"></i> My Work</div>
+        <h2 class="sec-title">Featured <span>Projects</span> &amp; Case Studies</h2>
+        <p class="sec-sub">A selection of real-world applications and systems I have designed and developed.</p>
+    </header>
+    
+    <div style="display:flex; justify-content:flex-end; margin-bottom: 2rem;">
+        <button id="addProjectBtn" onclick="toggleAdminPanel()" class="btn btn-primary" style="display:none;">+ Add New</button>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services" class="services-section">
+    <div class="section-wrap">
+        <header class="services-head">
+            <div class="section-header reveal">
+                <div class="eyebrow"><i data-lucide="settings"></i> What I Do</div>
+                <h2 class="sec-title">My <span>Services</span> &amp; Solutions</h2>
+                <p class="sec-sub">Digital solutions built around your business — from polished websites to full-stack web applications.</p>
+            </div>
+            <a href="#contact" class="btn-pill"><span class="dot"></span>Let's work together</a>
+        </header>
+
+        <div class="s-layout">
+            <div class="s-cards" id="s-cards" role="tablist"></div>
+            <div class="s-panel" id="s-panel" role="tabpanel"></div>
+        </div>
+
+        <section class="s-slider" id="s-slider">
+            <div class="s-sh">
+                <div class="s-lbl">THINGS WE BUILD · CLICK TO EXPLORE</div>
+                <div class="s-ticker-controls">
+                    <span class="s-ticker-status" id="s-ticker-status">AUTO SLIDING</span>
+                    <button class="s-pause" id="s-pause" type="button" aria-pressed="false">Ⅱ&nbsp; Pause</button>
+                </div>
+            </div>
+            <div class="s-viewport">
+                <div class="s-track" id="s-track"></div>
+            </div>
+        </section>
+
+        <div class="s-points">
+            <div class="s-point"><span class="s-num">01</span><div><b>Made for your business</b><span>Solutions shaped around your needs</span></div></div>
+            <div class="s-point"><span class="s-num">02</span><div><b>Responsive by design</b><span>Designed for every screen size</span></div></div>
+            <div class="s-point"><span class="s-num">03</span><div><b>Clear communication</b><span>Collaborative from start to finish</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section id="testimonials" class="testimonials-section">
+    <div class="section-wrap">
+        <header class="services-head reveal">
+            <div class="section-header">
+                <div class="eyebrow"><i data-lucide="message-square"></i> Client Feedback</div>
+                <h2 class="sec-title">What <span>Clients</span> Say</h2>
+                <p class="sec-sub">Don't just take my word for it. Here is what people I've worked with have to say.</p>
+            </div>
+            <button id="addTestimonialBtn" onclick="toggleTestimonialPanel()" class="btn btn-primary" style="display:none;">+ Add Review</button>
+        </header>
+
+        <div class="testimonials-grid" id="testimonialsGrid"></div>
+    </div>
+</section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            
+            <!-- Left Side: Info & Logo -->
+            <div class="contact-info reveal">
+                <header class="section-header">
+                    <div class="eyebrow"><i class="fas fa-envelope"></i> Get In Touch</div>
+                    <h2 class="sec-title">Let's build something <span>great</span>.</h2>
+                    <p class="sec-sub">Have a project in mind? Fill out the form or reach out through any of the channels below. I typically reply within 2-3 hours.</p>
+                </header>
+
+                <!-- Contact Brand Logo -->
+                <div class="contact-brand">
+                    <img src="imgage/logo.png" alt="SteppingTech Logo" class="contact-logo">
+                    <h3>SteppingTech</h3>
+                </div>
+
+                <div class="contact-details">
+                    <a href="mailto:hello@steppingtech.com" class="detail-item">
+                        <div class="d-icon"><i class="fas fa-envelope"></i></div>
+                        <div><span>Email Me</span><strong>hello@steppingtech.com</strong></div>
+                    </a>
+                    <a href="tel:+917972036402" class="detail-item">
+                        <div class="d-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div><span>Call Me</span><strong>+91 7972036402</strong></div>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="s-link"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="s-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="s-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/steppingtech" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="s-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+           <!-- Right Side: Form -->
+<div class="contact-form-wrapper reveal">
+    <form id="contactForm" class="modern-form">
+        
+        <!-- 🔥 Web3Forms Hidden Fields (Do not remove) -->
+        <input type="hidden" name="access_key" value="8e00c74e-c710-4a36-a065-1b2141fbf7d4">
+        <input type="hidden" name="from_name" value="SteppingTech Website">
+        <input type="hidden" name="subject" value="New Contact Form Submission">
+        <!-- Note: We removed the custom 'subject' text input below because we are using the hidden one for the email title -->
+        
+        <div class="form-row">
+            <div class="input-group">
+                <input type="text" id="name" name="name" required placeholder=" " autocomplete="name" minlength="2">
+                <label for="name">Your Name</label>
+                <i class="fas fa-user input-icon"></i>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" name="email" required placeholder=" " autocomplete="email">
+                <label for="email">Your Email</label>
+                <i class="fas fa-envelope input-icon"></i>
+            </div>
+        </div>
+        
+        <!-- I changed this input's name to "project_type" so it doesn't clash with the hidden "subject" field for Web3Forms -->
+        <div class="input-group">
+            <input type="text" id="subject" name="project_type" required placeholder=" " maxlength="120">
+            <label for="subject">Subject</label>
+            <i class="fas fa-tag input-icon"></i>
+        </div>
+        
+        <div class="input-group">
+            <textarea id="message" name="message" required placeholder=" " rows="4" maxlength="1000"></textarea>
+            <label for="message">Project Details</label>
+            <i class="fas fa-comment-alt input-icon textarea-icon"></i>
+        </div>
+        
+        <button type="submit" class="submit-btn"><span>Send Message</span><i class="fas fa-paper-plane"></i></button>
+        <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+    </form>
+</div>
+            
+        </div>
+    </section>
+ <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="f-logo">
+                        <img src="imgage/logo.png" alt="SteppingTech Logo">
+                        <span><span class="text-brand">&lt;</span>SteppingTech<span class="text-brand">/&gt;</span></span>
+                    </a>
+                    <p>Building fast, scalable, and modern digital experiences for startups, businesses, and students.</p>
+                    <div class="footer-socials">
+                        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/steppingtech" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="f-col">
+                        <h4>Quick Links</h4>
+                        <a href="#home">Home</a>
+                        <a href="#about">About Us</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#testimonials">Testimonials</a>
+                    </div>
+                    <div class="f-col">
+                        <h4>Services</h4>
+                        <a href="#services">Web Development</a>
+                        <a href="#services">E-commerce</a>
+                        <a href="#services">UI/UX Design</a>
+                        <a href="#services">Backend APIs</a>
+                    </div>
+                    <div class="f-col">
+                        <h4>Support</h4>
+                        <a href="#contact">Contact Us</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 SteppingTech. All rights reserved.</p>
+                <p><a href="login.html">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+<!-- ==================== MODALS (For Add/Update) ==================== -->
+<div id="addProjectModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 600px;">
+        <button onclick="toggleAdminPanel()" class="close-btn"><i class="fas fa-times"></i></button>
+        <h3>Add New Project</h3>
+        <p class="modal-sub">Fill in the details to add a project to your portfolio.</p>
+        <form id="addProjectForm" class="modal-form">
+            <input type="text" id="title" placeholder="Project Title" required>
+            <input type="text" id="tags" placeholder="Tags (comma separated)">
+            <input type="text" id="imageUrl" placeholder="Image URL (Optional)">
+            <input type="text" id="liveLink" placeholder="Live Demo URL (Optional)">
+            <textarea id="description" placeholder="Project Description" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary">Save Project <i class="fas fa-check"></i></button>
+        </form>
+    </div>
+</div>
+
+<div id="updateProjectModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 600px;">
+        <button onclick="toggleUpdateProjectPanel()" class="close-btn"><i class="fas fa-times"></i></button>
+        <h3>Update Project</h3>
+        <p class="modal-sub">Edit the details of this project.</p>
+        <form id="updateProjectForm" class="modal-form">
+            <input type="hidden" id="u-id">
+            <input type="text" id="u-title" placeholder="Project Title" required>
+            <input type="text" id="u-tags" placeholder="Tags">
+            <input type="text" id="u-imageUrl" placeholder="Image URL">
+            <input type="text" id="u-liveLink" placeholder="Live Demo URL">
+            <textarea id="u-description" placeholder="Project Description" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary">Update Project <i class="fas fa-edit"></i></button>
+        </form>
+    </div>
+</div>
+
+<div id="addTestimonialModal" class="modal-overlay">
+    <div class="modal-box">
+        <button onclick="toggleTestimonialPanel()" class="close-btn"><i class="fas fa-times"></i></button>
+        <h3>Add New Review</h3>
+        <p class="modal-sub">Add a new client testimonial.</p>
+        <form id="addTestimonialForm" class="modal-form">
+            <input type="text" id="t-name" placeholder="Client Name" required>
+            <input type="text" id="t-role" placeholder="Role / Company" required>
+            <textarea id="t-text" placeholder="Review Text" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary">Save Review <i class="fas fa-check"></i></button>
+        </form>
+    </div>
+</div>
+
+<div id="updateTestimonialModal" class="modal-overlay">
+    <div class="modal-box">
+        <button onclick="toggleUpdateTestimonialPanel()" class="close-btn"><i class="fas fa-times"></i></button>
+        <h3>Update Review</h3>
+        <p class="modal-sub">Edit this client review.</p>
+        <form id="updateTestimonialForm" class="modal-form">
+            <input type="hidden" id="u-t-id">
+            <input type="text" id="u-t-name" placeholder="Client Name" required>
+            <input type="text" id="u-t-role" placeholder="Role / Company" required>
+            <textarea id="u-t-text" placeholder="Review Text" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary">Update Review <i class="fas fa-edit"></i></button>
+        </form>
+    </div>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="js/main.js"></script>
+<script src="js/skills-sphere.js"></script>
+<script src="js/services.js"></script>
+<script src="js/app.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>

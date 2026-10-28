@@ -1,0 +1,81 @@
+/* ================================================
+   2. LAYOUT & UTILITIES
+   ================================================ */
+.section-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+.sec {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+  width: 100%;
+}
+
+.section-header {
+  margin-bottom: 3.5rem;
+  max-width: 700px;
+}
+.section-header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--brand);
+  background: var(--brand-soft);
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  border: 1px solid rgba(141, 182, 60, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.section-header .eyebrow i,
+.section-header .eyebrow svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 3;
+}
+.section-header .sec-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: var(--dark);
+  word-wrap: break-word;
+}
+.section-header .sec-title span {
+  color: var(--brand);
+}
+.section-header .sec-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 100%;
+}
+.services-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+.services-head .section-header {
+  margin-bottom: 0;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}

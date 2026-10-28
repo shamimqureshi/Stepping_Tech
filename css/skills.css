@@ -1,0 +1,375 @@
+/* ================================================
+   6. SKILLS SECTION (One Screen Fit)
+   ================================================ */
+.skills-section {
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Dots */
+.skills-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.12;
+  background-image: radial-gradient(var(--brand) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  pointer-events: none;
+}
+
+.section-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+}
+
+/* Layout */
+.skills-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* --- 3D Sphere --- */
+.sphere-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+.sphere-wrap.dragging {
+  cursor: grabbing;
+}
+.sphere-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--brand-soft),
+    transparent 72%
+  );
+  box-shadow: inset 0 0 60px var(--brand-soft);
+  animation: sphere-pulse 5s ease-in-out infinite;
+}
+.sphere-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  border: 1px dashed var(--brand);
+  opacity: 0.4;
+  animation: sphere-spin 40s linear infinite;
+  pointer-events: none;
+}
+@keyframes sphere-pulse {
+  50% {
+    transform: scale(1.06);
+    opacity: 0.85;
+  }
+}
+@keyframes sphere-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sphere-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  pointer-events: none;
+  z-index: 0;
+}
+.sphere-label strong {
+  color: var(--brand);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+.sphere-label small {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+}
+
+.sphere-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--brand);
+  font-size: 0.9rem;
+  will-change: transform, opacity;
+  transition: all 0.2s;
+  z-index: 1;
+}
+.sphere-node:hover,
+.sphere-node.active {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  box-shadow: 0 0 22px var(--brand-soft);
+}
+.sphere-caption {
+  margin: 0.5rem auto 0;
+  max-width: 280px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ================================================
+   🔥 Skill Cards Grid (Masonry Style - No Empty Space)
+   ================================================ */
+.skill-slider-viewport {
+  width: 100%;
+}
+
+.skill-groups {
+  /* Grid hata kar columns use kiya taaki height content ke hisaab se ho */
+  columns: 2;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.skill-group {
+  /* inline-block zaroori hai masonry ke liye */
+  display: inline-block; 
+  width: 100%;
+  margin-bottom: 1rem; /* Niche gap */
+  break-inside: avoid; /* Card ko beech se na tootne de */
+  
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: var(--surface);
+  transition: all 0.3s ease;
+}
+
+.skill-group:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand);
+  box-shadow: var(--shadow-sm);
+}
+
+.group-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.group-heading i {
+  width: 1rem;
+  height: 1rem;
+  color: var(--brand);
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 32px;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.skill-chip i {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--brand);
+  flex: 0 0 auto;
+}
+
+.skill-chip:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* Floating Orbs */
+.floating-orb {
+  position: absolute;
+  z-index: -1;
+  width: 230px;
+  aspect-ratio: 1;
+  border: 1px solid var(--brand-soft);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--brand-soft),
+    transparent 70%
+  );
+  animation: orb-drift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.orb-one {
+  top: 10%;
+  right: -95px;
+}
+.orb-two {
+  bottom: 3%;
+  left: -125px;
+  width: 290px;
+  animation-delay: -5s;
+}
+@keyframes orb-drift {
+  from {
+    transform: translate3d(0, -12px, 0) rotate(0deg) scale(0.96);
+  }
+  to {
+    transform: translate3d(-28px, 22px, 0) rotate(18deg) scale(1.05);
+  }
+}
+
+/* Bottom Row */
+.bottom-row {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 10px var(--brand);
+}
+.bottom-note {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+/* Mobile Marquee Wrapper (Hidden on Desktop) */
+.mobile-marquee-wrapper {
+  display: none;
+}
+
+
+/* ================================================
+   🔥 MOBILE VIEW (Marquee Only)
+   ================================================ */
+@media (max-width: 650px) {
+  
+  .skills-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 60px 1rem 2rem;
+  }
+
+  /* Hide Desktop Cards */
+  .skill-slider-viewport {
+    display: none !important;
+  }
+
+  /* Show Mobile Marquee */
+  .mobile-marquee-wrapper {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  .mobile-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: max-content;
+    animation: marqueeScroll 25s linear infinite;
+  }
+
+  .mobile-marquee-track:hover,
+  .mobile-marquee-track:active {
+    animation-play-state: paused;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .mobile-marquee-track .skill-chip {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Adjust Layout */
+  .skills-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+  .sphere-wrap {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .bottom-row {
+    display: none;
+  }
+}

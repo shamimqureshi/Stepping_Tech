@@ -1,0 +1,140 @@
+/* ================================================
+   13. RESPONSIVE DESIGN (All Devices)
+   ================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .s-layout { grid-template-columns: 1fr; }
+  .s-panel { position: relative; top: 0; min-height: auto; }
+  .hero-grid { gap: 2rem; }
+  .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); }
+}
+
+/* Small Tablet / Landscape Mobile (<= 900px) */
+@media (max-width: 900px) {
+  .hero-grid, .about-container, .contact-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-lead { margin: 1.5rem auto; }
+  .hero-actions { justify-content: center; }
+  .hero-stage { min-height: 350px; }
+
+  /* Footer — brand on top, links below in 3 cols (SINGLE SCREEN) */
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .f-logo, .footer-socials { justify-content: center; }
+  .footer-links { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; text-align: left; }
+  .f-col h4 { font-size: 0.72rem; white-space: nowrap; margin-bottom: 0.75rem; letter-spacing: 0.5px; }
+  .f-col a { font-size: 0.72rem; margin-bottom: 0.5rem; line-height: 1.4; word-break: break-word; white-space: normal; }
+  .footer-bottom { flex-direction: column; text-align: center; padding-top: 1.2rem; gap: 0.5rem; }
+  .footer-bottom p, .footer-bottom a { font-size: 0.72rem; }
+
+  /* Navbar */
+  .desktop-menu { display: none; }
+  .mobile-toggle { display: block; }
+  .admin-btn:not(.mobile-admin) { display: none; }
+
+  /* 🔥 FIX: Mobile Menu - Compact & Scrollable */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 75px; /* Closer to navbar */
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 90px); /* Prevents going off-screen */
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0.8rem;
+    flex-direction: column;
+    gap: 0.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    z-index: 999;
+  }
+  .mobile-menu.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  .mobile-menu .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0.8rem; /* Reduced padding from 1rem */
+    border-radius: 10px;
+    font-size: 0.9rem; /* Smaller font */
+    color: var(--text-muted);
+    border-bottom: none;
+  }
+  .mobile-menu .nav-link:hover, .mobile-menu .nav-link.active {
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+  
+  /* 🔥 FIX: Mobile Logout Button */
+  .mobile-menu .admin-btn.mobile-admin {
+    display: flex !important;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Portrait Mobile */
+@media (max-width: 650px) {
+  .hero { padding: 100px 1rem 2rem; }
+  .hero-title { font-size: clamp(2.2rem, 8vw, 3rem); }
+  .hero-stage { min-height: 280px; }
+  .logo-card { padding: 1.5rem; }
+
+  .s-cards { grid-template-columns: 1fr; }
+  .s-points { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  /* Skills mobile slider */
+  .skills-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .skill-groups { display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1rem; padding-bottom: 1rem; margin-top: 1rem; width: 100%; scrollbar-width: none; -ms-overflow-style: none; }
+  .skill-groups::-webkit-scrollbar { display: none; }
+  .skill-group { min-width: 85vw; scroll-snap-align: center; padding: 1.2rem; margin-bottom: 0; }
+  .skill-chip { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
+  .skill-chip i { width: 1rem; height: 1rem; }
+
+  .sphere-wrap { max-width: 280px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  .bottom-row { flex-direction: column; gap: 1rem; text-align: center; }
+  .s-sh { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .s-slide { width: 200px; }
+  .sec { padding: 4rem 1rem; }
+
+  .testimonials-grid { scroll-padding-left: 1.5rem; }
+  .t-card { scroll-snap-align: start; }
+  
+  /* 🔥 FIX: Projects Top Spacing */
+  .projects-section {
+    padding-top: 100px; /* Pushes cards down so they don't hide under navbar */
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+  .hero-title { font-size: 2rem; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-cta, .btn-ghost { width: 100%; justify-content: center; }
+  .stat-card { min-width: 100%; }
+  .nav-container { padding: 0 1rem; }
+  .brand-text { display: none; }
+}
+
+/* Tiny phones — keep footer 3 cols from breaking */
+@media (max-width: 340px) {
+  .f-col h4 { font-size: 0.6rem; letter-spacing: 0; white-space: normal; }
+  .f-col a { font-size: 0.6rem; }
+  .footer-links { gap: 0.4rem; }
+  .footer-brand p { font-size: 0.7rem; }
+}
