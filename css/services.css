@@ -1,7 +1,6 @@
-/* ==========================================================================
-   Services Section Styles
-   ========================================================================== */
-
+/* ================================================
+   8. SERVICES SECTION
+   ================================================ */
 .services-section {
   padding: 6rem 0;
 }
@@ -278,13 +277,7 @@
 
 .s-viewport {
   overflow: hidden;
-  -webkit-mask: linear-gradient(
-    90deg,
-    transparent,
-    #000 5%,
-    #000 95%,
-    transparent
-  );
+  -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 .s-track {
@@ -301,9 +294,7 @@
   padding-right: 1rem;
 }
 @keyframes s-slide {
-  to {
-    transform: translateX(-50%);
-  }
+  to { transform: translateX(-50%); }
 }
 
 .s-slide {
@@ -385,102 +376,92 @@
   font-size: 0.8rem;
   color: var(--text-muted);
 }
-/* ==========================================================================
-   DESKTOP OVERRIDES (Show slider, natural height, reduced top gap)
-   ========================================================================== */
-@media (min-width: 1025px) {
-  .services-section {
-    min-height: 100vh !important;
-    height: auto !important; 
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important; /* Aligns content to the top */
-    padding-top: 120px !important; /* 🔥 Smaller padding to close the gap */
-    padding-bottom: 4rem !important;
-  }
-  .s-slider {
-    display: block !important;
-  }
-}
 
-/* ==========================================================================
-   MOBILE VIEW (Real Cards + Slider + Connect Button)
-   ========================================================================== */
-@media (max-width: 650px) {
+/* ================================================
+   LAPTOP/DESKTOP VIEW
+   ================================================ */
+@media (min-width: 651px) {
   .services-section {
-    min-height: auto;
-    height: auto;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px 0 3rem 0;
+    padding: 80px 1.5rem 2rem;
+  }
+  .services-head, .s-layout { max-height: calc(100vh - 120px); }
+  .s-cards {
+    overflow-y: auto;
+    max-height: calc(100vh - 180px);
+  }
+  .s-cards::-webkit-scrollbar { width: 4px; }
+  .s-cards::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+}
+
+/* ================================================
+   MOBILE VIEW (Real Cards + Slider + Connect Button)
+   ================================================ */
+@media (max-width: 650px) {
+  .services-section {
+    min-height: 100vh;
+    height: 100vh; /* Locks to exactly one screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers everything vertically */
+    padding: 60px 0 1rem 0;
     overflow: hidden;
   }
-  .services-head {
+
+  .services-head { 
     padding: 0 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; 
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-  .services-head .sec-title {
-    font-size: 1.8rem;
-  }
-  .services-head .sec-sub {
-    display: none;
-  }
-  .services-head .btn-pill {
-    display: none;
-  }
+  .services-head .sec-title { font-size: 1.8rem; }
+  .services-head .sec-sub { display: none; }
+  
+  /* Hide the default "Let's work together" button in header to save space */
+  .services-head .btn-pill { display: none; } 
 
-  .s-layout {
-    display: none !important;
-  }
-  .s-points {
-    display: none;
-  }
+  .s-layout { display: none !important; }
+  .s-points { display: none; }
 
   .s-slider {
     display: block !important;
     margin-top: 0;
     width: 100%;
   }
-  .s-sh {
+
+  .s-sh { 
     padding: 0 1.5rem;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: row; 
+    align-items: center; 
     justify-content: space-between;
     margin-bottom: 0.5rem;
   }
-  .s-lbl {
-    font-size: 0.65rem;
-  }
-  .s-ticker-controls {
-    gap: 0.5rem;
-  }
-  .s-ticker-status {
-    display: none;
-  }
-  .s-pause {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.65rem;
-  }
+  .s-lbl { font-size: 0.65rem; }
+  .s-ticker-controls { gap: 0.5rem; }
+  .s-ticker-status { display: none; } /* Hide text to save space */
+  .s-pause { padding: 0.2rem 0.5rem; font-size: 0.65rem; }
 
-  .s-slide {
-    width: 75vw;
+  /* Make mobile cards look like the real service cards */
+  .s-slide { 
+    width: 75vw; 
     padding: 1rem;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     text-align: left;
   }
-  .s-slide b {
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
+
+  .s-slide b { 
+    font-size: 1.1rem; 
+    margin-bottom: 0.2rem; 
     line-height: 1.2;
   }
-  .s-slide span {
-    font-size: 0.75rem;
+  .s-slide span { 
+    font-size: 0.75rem; 
     line-height: 1.4;
     color: var(--text-muted);
     display: -webkit-box;
@@ -489,7 +470,8 @@
     overflow: hidden;
     margin-bottom: 0.5rem;
   }
-
+  
+  /* Add an "Explore service" text at bottom of card */
   .s-slide::after {
     content: "Explore service";
     display: block;
@@ -498,27 +480,21 @@
     color: var(--dark);
     margin-top: auto;
   }
-  .mobile-s-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--surface-2);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--brand);
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
+
+  /* Custom icon and number layout for mobile cards */
+  .mobile-s-icon { 
+    width: 32px; height: 32px; 
+    background: var(--surface-2); 
+    border-radius: 8px; 
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand); margin-bottom: 0.8rem; font-size: 0.9rem;
   }
-  .mobile-s-num {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--text-muted);
+  .mobile-s-num { 
+    position: absolute; top: 1rem; right: 1rem; 
+    font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); 
   }
 
+  /* NEW: Bottom Connect Button */
   .mobile-connect-wrapper {
     margin-top: 1.5rem;
     padding: 0 1.5rem;
