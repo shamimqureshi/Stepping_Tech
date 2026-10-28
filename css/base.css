@@ -1,0 +1,82 @@
+/* ================================================
+   1. VARIABLES & RESET
+   ================================================ */
+:root {
+  --brand: #8db63c;
+  --brand-dark: #6e9a2e;
+  --brand-light: #a8ce5a;
+  --brand-soft: rgba(141, 182, 60, 0.15);
+
+  --bg-main: #121518;
+  --bg-alt: #14171a;
+  --surface: #1a1d21;
+  --surface-2: #23282d;
+  --border: #2f353b;
+
+  --dark: #f2f4f5;
+  --text-muted: #9ba5ac;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --nav-h: 76px;
+  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  color-scheme: dark;
+  overflow-x: hidden;
+}
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  background-image:
+    radial-gradient(circle at 15% 50%, var(--brand-soft) 0%, transparent 40%),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(141, 182, 60, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(var(--border) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    30px 30px;
+  background-attachment: fixed;
+  color: var(--dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}

@@ -1,0 +1,161 @@
+/* ================================================
+   5. ABOUT SECTION
+   ================================================ */
+.about-section {
+  padding: 6rem 1.5rem;
+  scroll-margin-top: 80px;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.about-lead {
+  font-size: 1.15rem;
+  color: var(--dark);
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+.about-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.stats-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 120px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px var(--brand-soft);
+}
+
+.stat-card h3 {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: 0.4rem;
+}
+
+.stat-card span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.about-animation-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.about-animation-wrapper lottie-player {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 300px;
+}
+
+/* ================================================
+   MOBILE — natural height, no clipping
+   ================================================ */
+@media (max-width: 650px) {
+  .about-section {
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 1.5rem 60px;
+    overflow: visible;
+    scroll-margin-top: 70px;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .about-section .section-header {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  .about-section .sec-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  .about-section .sec-sub {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .about-animation-wrapper {
+    max-width: 180px;
+    min-height: 180px;
+    margin: 0 auto;
+  }
+  .about-animation-wrapper lottie-player {
+    min-height: 180px !important;
+  }
+
+  .about-lead {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    text-align: left;
+  }
+
+  .about-desc {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .stat-card {
+    padding: 0.8rem 0.3rem;
+    min-width: auto;
+  }
+  .stat-card h3 { font-size: 1.3rem; }
+  .stat-card span { font-size: 0.6rem; }
+}

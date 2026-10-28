@@ -1,0 +1,130 @@
+/* ================================================
+   3. NAVBAR
+   ================================================ */
+.navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1200px;
+  background: rgba(20, 23, 26, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  z-index: 1000;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.navbar.scrolled {
+  top: 10px;
+  background: rgba(20, 23, 26, 0.95);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 1.5rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.brand-logo img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+.brand:hover .brand-logo {
+  transform: rotate(-10deg) scale(1.1);
+}
+.brand-text {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--dark);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.desktop-menu {
+  display: flex;
+  gap: 0.8rem;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #9ba5ac;
+  border-radius: 99px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.nav-link i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--brand);
+  background: rgba(255, 255, 255, 0.05);
+}
+.nav-link:hover i {
+  transform: translateY(-2px);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.admin-btn {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.admin-btn:hover {
+  background: var(--brand-dark);
+  transform: translateY(-2px);
+}
+.admin-btn.hidden {
+  display: none !important;
+}
+
+.mobile-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--dark);
+  background: transparent;
+  border: none;
+}
+.mobile-menu {
+  display: none;
+}
