@@ -1,14 +1,13 @@
 /* ================================================
-   SteppingTech — Services Section Logic (services.js)
+   SteppingTech — Services Section Logic
    ================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if services section exists on the page before running
     if (!document.getElementById('s-cards')) return;
 
     const ic = p => `<i class="${p}"></i>`;
 
-    // Services Data
+    // Real Services Data
     const S = [
         {
             t: 'Website Development', i: 'fas fa-desktop', d: 'Modern, responsive websites that make your business look professional online.',
@@ -48,26 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Data for Slider (Things we build)
-    const W = [
-        ['Company profile', 0, 'Website'], ['Online boutique', 1, 'E-commerce'], ['Booking platform', 2, 'Web app'],
-        ['App redesign', 3, 'UI design'], ['Payments API', 4, 'Backend'], ['Content refresh', 5, 'Updates'],
-        ['Portfolio site', 0, 'Website'], ['Product store', 1, 'E-commerce'], ['Admin dashboard', 2, 'Web app']
-    ];
-
     const cardsContainer = document.getElementById('s-cards');
     const panelContainer = document.getElementById('s-panel');
     let currentIndex = 0;
 
-    // Helper: Scroll to Contact Section
     function scrollToContact() {
         const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Render Cards
+    // Render Desktop Cards
     if(cardsContainer) {
         cardsContainer.innerHTML = S.map((s, k) => `
             <div class="s-card ${k === 0 ? 'active-mobile' : ''}" data-index="${k}" role="tab">
@@ -84,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cardElements = cardsContainer ? cardsContainer.querySelectorAll('.s-card') : [];
 
-    // Function to update Desktop Panel
+    // Update Desktop Panel
     function updatePanel(index) {
         if(!panelContainer) return;
         currentIndex = index;
@@ -92,9 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardElements.forEach((c, i) => {
             c.classList.toggle('active', i === index);
-            if(window.innerWidth <= 650) {
-                c.classList.toggle('active-mobile', i === index);
-            }
+            if(window.innerWidth <= 650) c.classList.toggle('active-mobile', i === index);
         });
 
         if(window.innerWidth > 650) {
@@ -103,33 +90,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span><i class="dot"></i> SERVICE DETAILS</span>
                     <span>0${index + 1} — 06</span>
                 </div>
-                
                 <div class="s-panel-icon">${ic(s.i)}</div>
                 <div class="s-panel-tag">${s.tag}</div>
                 <h3>${s.h}</h3>
                 <p>${s.x}</p>
-                
                 <div class="s-divider"></div>
-                
                 <div class="s-features-title">WHAT WE CAN CREATE</div>
-                <ul>
-                    ${s.l.map(item => `<li><i class="far fa-check-circle"></i> ${item}</li>`).join('')}
-                </ul>
-
+                <ul>${s.l.map(item => `<li><i class="far fa-check-circle"></i> ${item}</li>`).join('')}</ul>
                 <div class="s-panel-foot">
                     <button class="s-btn" id="goToContactBtn">Start a project <i class="fas fa-arrow-up-right"></i></button>
                     <span class="s-note"><i class="far fa-comment-dots"></i> Let's discuss</span>
                 </div>
             `;
-
-            const goToContactBtn = panelContainer.querySelector('#goToContactBtn');
-            if(goToContactBtn) {
-                goToContactBtn.addEventListener('click', scrollToContact);
-            }
+            panelContainer.querySelector('#goToContactBtn').addEventListener('click', scrollToContact);
         }
     }
 
-    // Attach events to Cards
     cardElements.forEach((card) => {
         card.addEventListener('click', () => updatePanel(parseInt(card.dataset.index)));
         if(window.innerWidth > 650) {
@@ -138,19 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ================================================
-    // MOVING SLIDER LOGIC (AUTO SLIDER)
+    // MOBILE SLIDER LOGIC (Now with Real Data)
     // ================================================
     const track = document.getElementById('s-track');
 
     if(track) {
-        const slideHTML = W.map(([t, k, g]) => `
-            <button type="button" class="s-slide" data-index="${k}">
-                <div class="s-mock"><i></i><i></i><i></i></div>
-                <b>${t}</b><span>${g}</span>
+        // Generate HTML using the 6 real services
+        const slideHTML = S.map((s, k) => `
+            <button type="button" class="s-slide" data-index="${k}" style="position: relative;">
+                <span class="mobile-s-num">0${k + 1} / 06</span>
+                <div class="mobile-s-icon">${ic(s.i)}</div>
+                <b>${s.t}</b>
+                <span>${s.d}</span>
             </button>
         `).join('');
 
-        // Double the HTML to create seamless infinite loop
+        // Double the HTML for infinite loop
         track.innerHTML = `<div class="s-group">${slideHTML}</div><div class="s-group">${slideHTML}</div>`;
 
         // Click event for slider items
@@ -164,26 +143,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 🔥 PAUSE / PLAY LOGIC (FIXED)
+        // Pause / Play Logic
         const pauseBtn = document.getElementById('s-pause');
         const statusText = document.getElementById('s-ticker-status');
 
         if(pauseBtn && track) {
             pauseBtn.addEventListener('click', () => {
-                // Track par 'paused' class toggle karein
                 const isPaused = track.classList.toggle('paused');
-                
-                // Button ka text aur icon badlein
                 pauseBtn.innerHTML = isPaused ? '▶&nbsp; Play' : 'Ⅱ&nbsp; Pause';
                 pauseBtn.setAttribute('aria-pressed', isPaused);
-                
-                if(statusText) {
-                    statusText.textContent = isPaused ? 'SLIDING PAUSED' : 'AUTO SLIDING';
-                }
+                if(statusText) statusText.textContent = isPaused ? 'SLIDING PAUSED' : 'AUTO SLIDING';
             });
         }
     }
 
-    // Initialize First Panel on Load
+    // ================================================
+    // ADD CONNECT BUTTON FOR MOBILE
+    // ================================================
+    const sliderSection = document.getElementById('s-slider');
+    if (sliderSection && window.innerWidth <= 650) {
+        // Create the wrapper and button
+        const btnWrapper = document.createElement('div');
+        btnWrapper.className = 'mobile-connect-wrapper';
+        btnWrapper.innerHTML = `
+            <a href="#contact" class="mobile-connect-btn">
+                Let's Connect <i class="fas fa-arrow-right"></i>
+            </a>
+        `;
+        // Insert it right after the slider viewport
+        sliderSection.appendChild(btnWrapper);
+    }
+
+    // Initialize First Panel
     updatePanel(0);
 });
