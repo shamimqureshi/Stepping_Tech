@@ -112,16 +112,30 @@ document.addEventListener('DOMContentLoaded', () => {
             card.addEventListener('mouseenter', () => updatePanel(parseInt(card.dataset.index)));
         }
     });
-
     // ================================================
-    // MOBILE SLIDER LOGIC (Now with Real Data)
+    // SLIDER LOGIC (Different content for Desktop vs Mobile)
     // ================================================
     const track = document.getElementById('s-track');
 
     if(track) {
-        // Generate HTML using the 6 real services
-        const slideHTML = S.map((s, k) => `
-            <button type="button" class="s-slide" data-index="${k}" style="position: relative;">
+        // 1. Data for Desktop Slider (Mock UI - The second screenshot)
+        const W = [
+            ['Company profile', 0, 'Website'], ['Online boutique', 1, 'E-commerce'], ['Booking platform', 2, 'Web app'],
+            ['App redesign', 3, 'UI design'], ['Payments API', 4, 'Backend'], ['Content refresh', 5, 'Updates'],
+            ['Portfolio site', 0, 'Website'], ['Product store', 1, 'E-commerce'], ['Admin dashboard', 2, 'Web app']
+        ];
+
+        // 2. Generate the Desktop Mock HTML
+        const desktopSlideHTML = W.map(([t, k, g]) => `
+            <button type="button" class="s-slide" data-index="${k}">
+                <div class="s-mock"><i></i><i></i><i></i></div>
+                <b>${t}</b><span>${g}</span>
+            </button>
+        `).join('');
+
+        // 3. Generate the Mobile Real-Data HTML (The first screenshot)
+        const mobileSlideHTML = S.map((s, k) => `
+            <button type="button" class="s-slide mobile-slide-card" data-index="${k}" style="position: relative;">
                 <span class="mobile-s-num">0${k + 1} / 06</span>
                 <div class="mobile-s-icon">${ic(s.i)}</div>
                 <b>${s.t}</b>
@@ -129,8 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </button>
         `).join('');
 
-        // Double the HTML for infinite loop
-        track.innerHTML = `<div class="s-group">${slideHTML}</div><div class="s-group">${slideHTML}</div>`;
+        // 4. Decide which HTML to inject based on screen size
+        if (window.innerWidth > 650) {
+            // Desktop: Show the mock UI
+            track.innerHTML = `<div class="s-group">${desktopSlideHTML}</div><div class="s-group">${desktopSlideHTML}</div>`;
+        } else {
+            // Mobile: Show the real service data
+            track.innerHTML = `<div class="s-group">${mobileSlideHTML}</div><div class="s-group">${mobileSlideHTML}</div>`;
+        }
 
         // Click event for slider items
         track.addEventListener('click', e => {
