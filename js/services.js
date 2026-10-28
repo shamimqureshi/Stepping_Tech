@@ -156,12 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-
-    // ================================================
-    // ADD CONNECT BUTTON FOR MOBILE
+     // ================================================
+    // ADD CONNECT BUTTON
     // ================================================
     const sliderSection = document.getElementById('s-slider');
-    if (sliderSection && window.innerWidth <= 650) {
+    // 🔥 REMOVED the window.innerWidth <= 650 check so it shows on all devices!
+    if (sliderSection) {  
         // Create the wrapper and button
         const btnWrapper = document.createElement('div');
         btnWrapper.className = 'mobile-connect-wrapper';
@@ -173,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Insert it right after the slider viewport
         sliderSection.appendChild(btnWrapper);
     }
-
     // Initialize First Panel
     updatePanel(0);
 });
