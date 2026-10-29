@@ -1,38 +1,43 @@
-/* ================================================
-   3. NAVBAR
-   ================================================ */
+/* ==========================================================================
+   NAVBAR (Base & Desktop Styles)
+   ========================================================================== */
+
 .navbar {
   position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 1200px;
-  background: rgba(20, 23, 26, 0.7);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 99px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 23, 26, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
   z-index: 1000;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
+
 .navbar.scrolled {
-  top: 10px;
-  background: rgba(20, 23, 26, 0.95);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
+
+/* 🔥 FIX: Changed to full width with generous padding */
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
-  padding: 0 1.5rem;
+  height: 80px;
+  width: 100%;
+  max-width: 1400px; /* Wider max-width for big screens */
+  margin: 0 auto;
+  padding: 0 4rem; /* Space on left and right like Jimdo */
 }
+
+/* Brand / Logo */
 .brand {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  flex-shrink: 0;
 }
+
 .brand-logo {
   width: 40px;
   height: 40px;
@@ -42,64 +47,92 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s;
   flex-shrink: 0;
 }
+
 .brand-logo img {
   width: 80%;
   height: 80%;
   object-fit: contain;
 }
-.brand:hover .brand-logo {
-  transform: rotate(-10deg) scale(1.1);
-}
+
 .brand-text {
   font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-weight: 800;
+  font-size: 1.3rem;
   color: var(--dark);
   letter-spacing: -0.5px;
   white-space: nowrap;
 }
 
+.text-brand {
+  color: var(--brand);
+}
+
+/* 🔥 FIX: Centered Desktop Menu */
 .desktop-menu {
   display: flex;
-  gap: 0.8rem;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center; /* Centers links */
+  flex: 1; /* Pushes brand left and actions right */
 }
+
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #9ba5ac;
-  border-radius: 99px;
-  transition: all 0.3s ease;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
   white-space: nowrap;
 }
+
 .nav-link i {
   font-size: 0.8rem;
-  transition: transform 0.3s ease;
 }
+
 .nav-link:hover,
 .nav-link.active {
   color: var(--brand);
-  background: rgba(255, 255, 255, 0.05);
-}
-.nav-link:hover i {
-  transform: translateY(-2px);
 }
 
+/* 🔥 FIX: Aligned Actions to the right */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1.5rem;
+  flex-shrink: 0;
 }
-.admin-btn {
+
+/* Public "Let's Connect" button */
+.connect-btn {
   background: var(--brand);
-  color: #fff;
+  color: #050a08;
   border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.connect-btn:hover {
+  background: var(--brand-light);
+  transform: translateY(-2px);
+}
+
+/* Admin Logout Button */
+.admin-btn {
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
   padding: 0.6rem 1.2rem;
   border-radius: 99px;
   font-weight: 600;
@@ -110,21 +143,16 @@
   transition: all 0.3s ease;
   white-space: nowrap;
 }
+
 .admin-btn:hover {
-  background: var(--brand-dark);
-  transform: translateY(-2px);
-}
-.admin-btn.hidden {
-  display: none !important;
+  background: rgba(239, 68, 68, 0.1);
 }
 
+/* Hide mobile menu components on desktop */
 .mobile-toggle {
   display: none;
-  font-size: 1.5rem;
-  color: var(--dark);
-  background: transparent;
-  border: none;
 }
+
 .mobile-menu {
   display: none;
 }
