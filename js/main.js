@@ -16,33 +16,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // ================================================
+        // ================================================
     // 2. MOBILE MENU TOGGLE
     // ================================================
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenuBtn = document.getElementById('closeMenuBtn'); // The inner X
 
+    // Open Menu
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (icon) {
-                if (mobileMenu.classList.contains('active')) {
-                    icon.classList.replace('fa-bars', 'fa-xmark');
-                } else {
-                    icon.classList.replace('fa-xmark', 'fa-bars');
-                }
-            }
+            mobileMenu.classList.add('active');
         });
     }
 
+    // Close via Inner X
+    if (closeMenuBtn && mobileMenu) {
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    }
+
+    // Close when clicking outside
+    document.addEventListener('click', (event) => {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        }
+    });
+
+    // Close when a link is clicked
     document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
         link.addEventListener('click', () => {
             if (mobileMenu) mobileMenu.classList.remove('active');
-            if (mobileMenuBtn) {
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) icon.classList.replace('fa-xmark', 'fa-bars');
-            }
         });
     });
 
