@@ -2,12 +2,12 @@
    6. SKILLS SECTION
    ========================================================================== */
 .skills-section {
-  min-height: 100vh;
+  min-height: auto; /* 🔥 Changed from 100vh */
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px 1.5rem 4rem;
+  padding: 80px 1.5rem 4rem;
   position: relative;
   overflow: hidden; /* Prevents horizontal scroll */
 }
@@ -267,15 +267,14 @@
    ========================================================================== */
 @media (max-width: 1024px) {
   .skills-layout {
-    grid-template-columns: 1fr; /* Stack sphere and cards */
+    grid-template-columns: 1fr; 
     gap: 2rem;
   }
   
   .sphere-wrap {
-    max-width: 250px; /* Smaller sphere for tablets */
+    max-width: 250px; 
   }
 
-  /* Switch from masonry columns to a standard 2-column grid */
   .skill-groups {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -284,7 +283,7 @@
   }
   
   .skill-group {
-    display: block; /* Reset inline-block */
+    display: block; 
     margin-bottom: 0;
     width: 100%;
   }
@@ -296,8 +295,8 @@
 @media (max-width: 650px) {
   .skills-section {
     height: auto;
-    min-height: 100vh;
-    padding: 100px 1rem 4rem;
+    min-height: auto;
+    padding: 80px 1rem 3rem;
   }
 
   .skill-slider-viewport { display: none !important; }
