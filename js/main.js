@@ -122,5 +122,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Contact form is handled exclusively in contact.js (mailto:). No duplicate here.
 });
