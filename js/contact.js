@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus  = document.getElementById('formStatus');
 
     // Your Spring Boot backend address
-    const API_URL = 'http://localhost:2005/api/contact'; 
+    const API_URL = 'https://steppingtechfullstack.onrender.com/api/contact'; 
 
     if (!contactForm || !formStatus) return;
 
