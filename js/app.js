@@ -3,7 +3,7 @@
    ================================================ */
 
 // Note: When you deploy, change this to your Render/Live URL
-const API_URL = 'https://steppingtechfullstack.onrender.com/api';
+const API_URL = const API_URL = 'https://steppingtechfullstack.onrender.com/api';
 
 // XSS-safe string escaper for inline onclick handlers
 function esc(str) {
