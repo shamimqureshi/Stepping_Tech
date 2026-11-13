@@ -2,8 +2,12 @@
    SteppingTech — Backend API Logic (app.js)
    ================================================ */
 
-// 🔥 FIXED: Removed the duplicate 'const API_URL ='
 const API_URL = 'https://steppingtechfullstack.onrender.com/api';
+
+// 🔥 CLOUDINARY CONFIGURATION
+// Yahan apne Cloudinary ke details daalein
+const CLOUDINARY_CLOUD_NAME = "p8qfrwwr"; // Aapke screenshot se
+const CLOUDINARY_UPLOAD_PRESET = "steppingtech_upload"; // Jo naam aapne preset ko diya
 
 // XSS-safe string escaper
 function esc(str) {
@@ -14,25 +18,62 @@ function esc(str) {
         .replace(/\n/g, ' ');
 }
 
+// 🔥 Image Upload Function (Cloudinary)
+window.uploadImageToCloudinary = async function(event, targetInputId) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+        alert('Please select an image file.');
+        return;
+    }
+
+    const inputField = document.getElementById(targetInputId);
+    inputField.value = "Uploading image... Please wait...";
+    inputField.style.color = "var(--brand)";
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    try {
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+
+        const data = await response.json();
+        inputField.value = data.secure_url;
+        inputField.style.color = "var(--brand)"; 
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('Image upload failed. Please try again.');
+        inputField.value = "";
+        inputField.style.color = "";
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const isAdmin = localStorage.getItem('isAdminLoggedIn') === 'true';
 
     function applyAdminState() {
-        const addProjectBtn     = document.getElementById('addProjectBtn');
+        const addProjectBtn = document.getElementById('addProjectBtn');
         const addTestimonialBtn = document.getElementById('addTestimonialBtn');
-        const logoutBtn         = document.getElementById('adminLogoutBtn');
-        const logoutBtnMobile   = document.getElementById('adminLogoutBtnMobile');
+        const logoutBtn = document.getElementById('adminLogoutBtn');
+        const logoutBtnMobile = document.getElementById('adminLogoutBtnMobile');
 
         if (isAdmin) {
-            if (addProjectBtn)     addProjectBtn.style.display = 'inline-flex';
+            if (addProjectBtn) addProjectBtn.style.display = 'inline-flex';
             if (addTestimonialBtn) addTestimonialBtn.style.display = 'inline-flex';
-            if (logoutBtn)         logoutBtn.classList.remove('hidden');
-            if (logoutBtnMobile)   logoutBtnMobile.classList.remove('hidden');
+            if (logoutBtn) logoutBtn.classList.remove('hidden');
+            if (logoutBtnMobile) logoutBtnMobile.classList.remove('hidden');
         } else {
-            if (addProjectBtn)     addProjectBtn.style.display = 'none';
+            if (addProjectBtn) addProjectBtn.style.display = 'none';
             if (addTestimonialBtn) addTestimonialBtn.style.display = 'none';
-            if (logoutBtn)         logoutBtn.classList.add('hidden');
-            if (logoutBtnMobile)   logoutBtnMobile.classList.add('hidden');
+            if (logoutBtn) logoutBtn.classList.add('hidden');
+            if (logoutBtnMobile) logoutBtnMobile.classList.add('hidden');
         }
     }
 
@@ -43,6 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.reload();
     };
 
+    // ================================================
+    // 1) PROJECTS LOGIC
+    // ================================================
     function loadProjects() {
         const grid = document.getElementById('projectsGrid');
         if (!grid) return;
@@ -91,23 +135,42 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Add, Update, Delete Project functions
+    // Add Project
     const addForm = document.getElementById('addProjectForm');
     if (addForm) {
         addForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const newProject = { title: document.getElementById('title').value, description: document.getElementById('description').value, tags: document.getElementById('tags').value, imageUrl: document.getElementById('imageUrl').value, liveLink: document.getElementById('liveLink').value };
+            const newProject = { 
+                title: document.getElementById('title').value, 
+                description: document.getElementById('description').value, 
+                tags: document.getElementById('tags').value, 
+                imageUrl: document.getElementById('imageUrl').value, 
+                liveLink: document.getElementById('liveLink').value 
+            };
             try {
-                await fetch(`${API_URL}/projects`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newProject) });
-                e.target.reset(); toggleAdminPanel(); loadProjects();
+                await fetch(`${API_URL}/projects`, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify(newProject) 
+                });
+                e.target.reset(); 
+                toggleAdminPanel(); 
+                loadProjects();
             } catch (error) { console.error('Error adding project:', error); }
         });
     }
 
+    // Update Project
     window.openUpdateProject = function(id, title, desc, tags, img, link) {
-        document.getElementById('u-id').value = id; document.getElementById('u-title').value = title; document.getElementById('u-description').value = desc; document.getElementById('u-tags').value = tags || ''; document.getElementById('u-imageUrl').value = img || ''; document.getElementById('u-liveLink').value = link || '';
+        document.getElementById('u-id').value = id; 
+        document.getElementById('u-title').value = title; 
+        document.getElementById('u-description').value = desc; 
+        document.getElementById('u-tags').value = tags || ''; 
+        document.getElementById('u-imageUrl').value = img || ''; 
+        document.getElementById('u-liveLink').value = link || '';
         document.getElementById('updateProjectModal').classList.add('open');
     };
+    
     window.toggleUpdateProjectPanel = function() { document.getElementById('updateProjectModal').classList.remove('open'); };
 
     const updateForm = document.getElementById('updateProjectForm');
@@ -115,23 +178,39 @@ document.addEventListener('DOMContentLoaded', () => {
         updateForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('u-id').value;
-            const updatedProject = { title: document.getElementById('u-title').value, description: document.getElementById('u-description').value, tags: document.getElementById('u-tags').value, imageUrl: document.getElementById('u-imageUrl').value, liveLink: document.getElementById('u-liveLink').value };
+            const updatedProject = { 
+                title: document.getElementById('u-title').value, 
+                description: document.getElementById('u-description').value, 
+                tags: document.getElementById('u-tags').value, 
+                imageUrl: document.getElementById('u-imageUrl').value, 
+                liveLink: document.getElementById('u-liveLink').value 
+            };
             try {
-                await fetch(`${API_URL}/projects/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updatedProject) });
-                toggleUpdateProjectPanel(); loadProjects();
+                await fetch(`${API_URL}/projects/${id}`, { 
+                    method: 'PUT', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify(updatedProject) 
+                });
+                toggleUpdateProjectPanel(); 
+                loadProjects();
             } catch (error) { console.error('Error updating project:', error); }
         });
     }
 
+    // Delete Project
     window.deleteProject = async function(id) {
         if(!confirm("Are you sure you want to delete this project?")) return;
         try {
-            await fetch(`${API_URL}/projects/${id}`, { method: 'DELETE' }); loadProjects();
+            await fetch(`${API_URL}/projects/${id}`, { method: 'DELETE' }); 
+            loadProjects();
         } catch (error) { console.error('Error deleting project:', error); }
     };
+    
     window.toggleAdminPanel = function() { document.getElementById('addProjectModal').classList.toggle('open'); };
 
-    // Testimonials logic
+    // ================================================
+    // 2) TESTIMONIALS LOGIC
+    // ================================================
     function loadTestimonials() {
         const grid = document.getElementById('testimonialsGrid');
         if (!grid) return;
@@ -169,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    // Add Testimonial
     const addTForm = document.getElementById('addTestimonialForm');
     if (addTForm) {
         addTForm.addEventListener('submit', async (e) => {
@@ -181,10 +261,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Update Testimonial
     window.openUpdateTestimonial = function(id, name, role, text) {
-        document.getElementById('u-t-id').value = id; document.getElementById('u-t-name').value = name; document.getElementById('u-t-role').value = role; document.getElementById('u-t-text').value = text;
+        document.getElementById('u-t-id').value = id; 
+        document.getElementById('u-t-name').value = name; 
+        document.getElementById('u-t-role').value = role; 
+        document.getElementById('u-t-text').value = text;
         document.getElementById('updateTestimonialModal').classList.add('open');
     };
+    
     window.toggleUpdateTestimonialPanel = function() { document.getElementById('updateTestimonialModal').classList.remove('open'); };
 
     const updateTForm = document.getElementById('updateTestimonialForm');
@@ -200,14 +285,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Delete Testimonial
     window.deleteTestimonial = async function(id) {
         if(!confirm("Are you sure you want to delete this review?")) return;
         try {
             await fetch(`${API_URL}/testimonials/${id}`, { method: 'DELETE' }); loadTestimonials();
         } catch (error) { console.error('Error deleting testimonial:', error); }
     };
+    
     window.toggleTestimonialPanel = function() { document.getElementById('addTestimonialModal').classList.toggle('open'); };
 
+    // INITIAL LOAD
     loadProjects();
     loadTestimonials();
 });
