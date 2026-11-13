@@ -5,9 +5,8 @@
 const API_URL = 'https://steppingtechfullstack.onrender.com/api';
 
 // 🔥 CLOUDINARY CONFIGURATION
-// Yahan apne Cloudinary ke details daalein
-const CLOUDINARY_CLOUD_NAME = "p8qfrwwr"; // Aapke screenshot se
-const CLOUDINARY_UPLOAD_PRESET = "steppingtech_upload"; // Jo naam aapne preset ko diya
+const CLOUDINARY_CLOUD_NAME = "p8qfrwwr"; // Aapka Cloud Name
+const CLOUDINARY_UPLOAD_PRESET = "steppingtech_upload"; // Aapka Preset
 
 // XSS-safe string escaper
 function esc(str) {
@@ -18,7 +17,7 @@ function esc(str) {
         .replace(/\n/g, ' ');
 }
 
-// 🔥 Image Upload Function (Cloudinary)
+// 🔥 FIXED: Image Upload Function (Ab 404 error nahi aayega)
 window.uploadImageToCloudinary = async function(event, targetInputId) {
     const file = event.target.files[0];
     if (!file) return;
@@ -29,8 +28,11 @@ window.uploadImageToCloudinary = async function(event, targetInputId) {
     }
 
     const inputField = document.getElementById(targetInputId);
-    inputField.value = "Uploading image... Please wait...";
-    inputField.style.color = "var(--brand)";
+    
+    // 🔥 FIX: Input field mein URL nahi daalenge, sirf placeholder text dikhayenge
+    inputField.placeholder = "Uploading image... Please wait...";
+    inputField.value = ""; // Value ko khali rakhein taaki browser usko URL na samjhe
+    inputField.disabled = true;
 
     const formData = new FormData();
     formData.append('file', file);
@@ -45,13 +47,17 @@ window.uploadImageToCloudinary = async function(event, targetInputId) {
         if (!response.ok) throw new Error('Upload failed');
 
         const data = await response.json();
+        
+        // 🔥 FIX: Upload hone ke baad hi asli URL input mein daalein
         inputField.value = data.secure_url;
-        inputField.style.color = "var(--brand)"; 
+        inputField.placeholder = "Image Uploaded";
+        
     } catch (error) {
         console.error('Error uploading image:', error);
         alert('Image upload failed. Please try again.');
-        inputField.value = "";
-        inputField.style.color = "";
+        inputField.placeholder = "Click to Upload Image";
+    } finally {
+        inputField.disabled = false;
     }
 };
 
